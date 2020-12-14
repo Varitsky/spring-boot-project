@@ -27,7 +27,7 @@ public class ProductController {
 //        return "all_products";
 //    } // версия без фильтра
 
-    @GetMapping("/all")
+    @GetMapping
     public String getAllProducts(Model model,
                           @RequestParam(required = false, name = "min_cost") Integer minCost,
                           @RequestParam(required = false, name = "max_cost") Integer maxCost
@@ -56,14 +56,14 @@ public class ProductController {
     @GetMapping("/remove/{id}")
     public String deleteProductById(@PathVariable Long id) {
         productService.deleteById(id);
-        return "redirect:/products/all";
+        return "redirect:/products";
     }
 
     @PostMapping("/add")
 //    public String addNewBox(@RequestParam Long id, @RequestParam String color, @RequestParam int size) {
     public String addNewProduct(@ModelAttribute Product product) {
         productService.save(product);
-        return "redirect:/products/all";
+        return "redirect:/products";
     }
 
 

@@ -24,10 +24,10 @@ public class ProductInMemoryRepository {
     @PostConstruct
     public void init() {
         this.products = new ArrayList<>(Arrays.asList(
-                new Product(1L, "FirstTitle", 25),
-                new Product(2L, "SecondTitile", 30),
-                new Product(3L, "ThirdTitle", 35),
-                new Product(4L, "FourthTitle", 40)
+                new Product(1L, "FirstTitle", 25, "Description"),
+                new Product(2L, "SecondTitile", 30, "Description"),
+                new Product(3L, "ThirdTitle", 35, "Description"),
+                new Product(4L, "FourthTitle", 40, "Description")
         ));
     }
 
