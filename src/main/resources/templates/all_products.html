@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Students</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+<div class="container">
+
+
+    <h1>Фильтр</h1>
+    <form method="get" th:action="@{'/products/all'}">
+        <input class="form-control" th:value="${param.min_cost != null ? param.min_cost : ''}" type="number" placeholder="Минимальная цена" name="min_cost"/>
+        <input class="form-control" th:value="${param.max_cost != null ? param.max_cost : ''}" type="number" placeholder="Максимальная цена" name="max_cost"/>
+        <button class="btn btn-primary" type="submit">Найти</button>
+    </form>
+
+
+    <h1>Список товаров:</h1>
+    <table th:if="${frontProducts.size() > 0}" class="table">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Действия</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="b : ${frontProducts}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.title}"></td>
+            <td th:text="${'C: ' + b.cost}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/products/remove/' + ${b.id}}">Удалить</a></td>
+            <td><a class="btn btn-info" th:href="@{'/products/one/' + ${b.id}}">Подробнее о товаре</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <span th:unless="${frontProducts.size() > 0}">Товаров нет</span>
+    <span th:text="'Количество товаров: ' + ${frontProducts.size()}"/>
+    <form th:action="@{'/products/add'}" method="post">
+        <!-- GET http://localhost:8189/app/boxes/add?id=10&color=red&size=20 -->
+        <label>id</label>
+        <input type="number" name="id">
+        <label>titile</label>
+        <input type="text" name="title">
+        <label>cost</label>
+        <input type="number" name="cost">
+        <button class="btn btn-primary" type="submit">Создать</button>
+    </form>
+</div>
+</body>
+</html>

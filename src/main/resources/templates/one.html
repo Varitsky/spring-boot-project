@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Students</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <h1>Информация о товаре:</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="b : ${frontProduct}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.title}"></td>
+            <td th:text="${'C: ' + b.cost}"></td>
+
+            <td><a class="btn btn-success" th:href="@{'/products/all'}">Назад</a></td>
+
+
+
+<!--            <form method="GET" th:action="@{'products/all'}">-->
+
+<!--&lt;!&ndash;                <a class="btn btn-info" th:href="@{'/products/one/' + ${b.id}}">&ndash;&gt;-->
+<!--                    -->
+<!--                    -->
+<!--                <button class="btn btn-success" type="submit">Назад</button>-->
+<!--            </form>-->
+
+        </tr>
+        </tbody>
+    </table>
+<!--    Совершенно не понятно как это вообще может тут работать, так как прямого вызова ссылки нет, hzhzhz]-->
+<!--    <span th:unless="${frontProduct.size() > 0}">Товара нет</span>-->
+<!--    <span th:text="'Количество товаров: ' + ${frontProducts.size()}"/>-->
+<!--    <form th:action="@{'/products/all'}" method="get">-->
+<!--        <td><a class="btn btn-success" th:href="@{'/products/all/">Назад</a></td>-->
+<!--    </form>-->
+</div>
+</body>
+</html>
