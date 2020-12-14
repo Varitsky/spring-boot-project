@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Students</title>
+    <title>Products</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -15,7 +15,8 @@
 
 
     <h1>Фильтр</h1>
-    <form method="get" th:action="@{'/products/all'}">
+<!--    <form method="get" th:action="@{'/products/all'}">-->
+    <form method="get" th:action="@{'/products'}">
         <input class="form-control" th:value="${param.min_cost != null ? param.min_cost : ''}" type="number" placeholder="Минимальная цена" name="min_cost"/>
         <input class="form-control" th:value="${param.max_cost != null ? param.max_cost : ''}" type="number" placeholder="Максимальная цена" name="max_cost"/>
         <button class="btn btn-primary" type="submit">Найти</button>
@@ -34,26 +35,39 @@
         </thead>
         <tbody>
 
-        <tr th:each="b : ${frontProducts}">
-            <td th:text="${b.id}"></td>
-            <td th:text="${b.title}"></td>
-            <td th:text="${'C: ' + b.cost}"></td>
-            <td><a class="btn btn-danger" th:href="@{'/products/remove/' + ${b.id}}">Удалить</a></td>
-            <td><a class="btn btn-info" th:href="@{'/products/one/' + ${b.id}}">Подробнее о товаре</a></td>
+        <tr th:each="p : ${frontProducts}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.cost + ' ₽'}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/products/remove/' + ${p.id}}">Удалить</a></td>
+            <td><a class="btn btn-info" th:href="@{'/products/one/' + ${p.id}}">Подробнее о товаре</a></td>
         </tr>
         </tbody>
     </table>
-    <span th:unless="${frontProducts.size() > 0}">Товаров нет</span>
-    <span th:text="'Количество товаров: ' + ${frontProducts.size()}"/>
+
+    <div class="container">
+    <table class="table table-light table-striped">
+        <td>
+        <span th:text="'Количество товаров: ' + ${frontProducts.size()}"/>
+        </td>
+    </table>
+    </div>
+
+
+
+    <h2>Создать товар:</h2>
     <form th:action="@{'/products/add'}" method="post">
-        <!-- GET http://localhost:8189/app/boxes/add?id=10&color=red&size=20 -->
-        <label>id</label>
-        <input type="number" name="id">
-        <label>titile</label>
-        <input type="text" name="title">
-        <label>cost</label>
-        <input type="number" name="cost">
-        <button class="btn btn-primary" type="submit">Создать</button>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">ID</span>
+            <input type="number" name="id">
+            <span class="input-group-text" id="addon-wrapping">Название</span>
+            <input type="text" name="title">
+            <span class="input-group-text" id="addon-wrapping">Цена</span>
+            <input type="number" name="cost">
+            <span class="input-group-text" id="addon-wrapping">Описание</span>
+            <input type="text" placeholder="Необязательное поле" name="description">
+            <button class="btn btn-primary" type="submit">Создать</button>
+        </div>
     </form>
 </div>
 </body>

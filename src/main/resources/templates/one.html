@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Students</title>
+    <title>ProductDescription</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -23,26 +23,30 @@
         </thead>
         <tbody>
 
-        <tr th:each="b : ${frontProduct}">
-            <td th:text="${b.id}"></td>
-            <td th:text="${b.title}"></td>
-            <td th:text="${'C: ' + b.cost}"></td>
+        <tr th:each="p : ${frontProduct}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.cost + ' ₽'}"></td>
 
-            <td><a class="btn btn-success" th:href="@{'/products/all'}">Назад</a></td>
-
-
-
-<!--            <form method="GET" th:action="@{'products/all'}">-->
-
-<!--&lt;!&ndash;                <a class="btn btn-info" th:href="@{'/products/one/' + ${b.id}}">&ndash;&gt;-->
-<!--                    -->
-<!--                    -->
-<!--                <button class="btn btn-success" type="submit">Назад</button>-->
-<!--            </form>-->
-
+            <td><a class="btn btn-success" th:href="@{'/products'}">Назад</a></td>
         </tr>
+
+
         </tbody>
     </table>
+
+
+    <h1>Описание:</h1>
+    <div class="container">
+        <table class="table table-light table-striped">
+            <tr th:each="p : ${frontProduct}">
+                <td th:text="${p.description}"></td>
+            </tr>
+        </table>
+
+    </div>
+
+
 <!--    Совершенно не понятно как это вообще может тут работать, так как прямого вызова ссылки нет, hzhzhz]-->
 <!--    <span th:unless="${frontProduct.size() > 0}">Товара нет</span>-->
 <!--    <span th:text="'Количество товаров: ' + ${frontProducts.size()}"/>-->
